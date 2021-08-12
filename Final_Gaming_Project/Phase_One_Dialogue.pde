@@ -1,4 +1,4 @@
-class ph1d
+class Phase_1
 {
   String s;
   float x, y;
@@ -7,7 +7,7 @@ class ph1d
   PImage gp, agp, sgp, dgp, spgp, fgp, tgp, godku, blueku;
   PVector p1s, p2s, p3s;
 
-  ph1d()
+  Phase_1()
   {
     s = "Oh...";
     gp = loadImage("goku_portrait.png");
@@ -118,7 +118,7 @@ class ph1d
     }
   }
 
-  void confirmation()
+  void confirmControls()
   {
     if (confirm && key == ' ' && s == "Oh...")
     {

@@ -6,6 +6,9 @@ void FSMdisplay() {
   case 1:
     p.levelScreen();
     break;
+  case 10:
+    ph1.introText();
+    break;
   case 2:
     break;
   case 3:
@@ -27,24 +30,7 @@ void FSMdisplay() {
   default:
     break;
   }
-
-  //  if (state == -1)
-  //  {
-  //    e.exitGame();
-  //  } else if (state == 3)
-  //  {
-  //    o.selectScreen();
-  //    o.fadeBack();
-  //  } else if (state == 3)
-  //  {
-  //    o.fadeIn();
-  //  } else if (state == 3.1)
-  //  {
-  //    o.credits();
-  //  } else if (state == 3.2)
-  //  {
-  //    o.controls();
-  //  } else if (state == 1)
+  //  else if (state == 1)
   //  {
   //    p.fadeIn();
   //    p.phaseSelection();
@@ -115,6 +101,9 @@ void FSMcontrols() {
     break;
   case 1:
     p.selectControls();
+    break;
+  case 10:
+    ph1.confirmControls();
     break;
   case 2:
     break;

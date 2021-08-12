@@ -20,12 +20,13 @@ import ddf.minim.ugens.*;
 
 mainMenu mm;
 options o;
+Exit e;
+Play p;
+Phase_1 ph1;
 player1 one;
 player2 two;
 phase1 godphase;
 phase2 bluephase;
-Exit e;
-Play p;
 int fade, state;
 boolean attackNotActive;
 PVector l, s;
@@ -84,6 +85,7 @@ void setup()
   mm = new mainMenu();
   e = new Exit();
   p = new Play();
+  ph1 = new Phase_1();
   o = new options();
   godphase = new phase1();
   bluephase = new phase2();

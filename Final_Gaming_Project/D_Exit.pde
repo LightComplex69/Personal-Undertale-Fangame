@@ -110,7 +110,6 @@ class Exit
       break;
     case 2:
       fade = 0;
-      mm.stopSelection = false;
       state = 0;
       break;
 

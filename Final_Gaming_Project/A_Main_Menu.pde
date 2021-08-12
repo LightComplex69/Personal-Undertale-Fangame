@@ -1,30 +1,27 @@
 class mainMenu
 {
-  PImage Title, play, htp, options, exit, backgroundku;
+  PImage Title, play, htp, options, exit, muiku;
   PVector title, ps, htps, os, es;
   int opacity, selectHandler;
   float titleSpeed, fadeSpeed;
-  boolean stopSelection;
 
   mainMenu()
   {
     Title = loadImage("title_screen.png");
     title = new PVector(width*0.4, height*0.1);
-    opacity = 0; 
+    opacity = 0;
     fadeSpeed = titleSpeed = selectHandler = 1;
 
     play = loadImage("play_button.png");
     htp = loadImage("htp_button.png");
     options = loadImage("options_button.png");
     exit = loadImage("exit_button.png");
-    backgroundku = loadImage("mui_goku.png");
+    muiku = loadImage("mui_goku.png");
 
     ps = new PVector(width*0.47, height*0.4);
     htps = new PVector(width*0.47, height*0.55);
     os = new PVector(width*0.47, height*0.7);
     es = new PVector(width*0.47, height*0.85);
-
-    stopSelection = false;
   }
 
   void selectScreen()
@@ -39,7 +36,7 @@ class mainMenu
     fill(255);
 
     tint(255, opacity);
-    image(backgroundku, width*0.42, height*0.2);
+    image(muiku, width*0.42, height*0.2);
 
     tint(255);
     image(Title, title.x, title.y);
@@ -84,9 +81,14 @@ class mainMenu
       }
       break;
     case ' ':
-      stopSelection = true;
       defineSelection();
       break;
+      
+    case 'm':
+    case 'M':
+      state = 4;
+      break;
+      
     default:
       break;
     }
@@ -99,7 +101,7 @@ class mainMenu
       tint(#FEFF08);
       ps.x = width*.45;
       popStyle();
-      
+
       htps.x = width*.47;
       os.x = width*.47;
       es.x = width*.47;

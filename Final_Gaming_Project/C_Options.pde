@@ -43,7 +43,6 @@ class options
       if (fade > 255)
       {
         fade += 0;
-        mm.stopSelection = false;
         fadeBack = false;
         state = 0;
       } else

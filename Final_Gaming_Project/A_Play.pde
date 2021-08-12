@@ -1,7 +1,7 @@
 class Play {
-  int fade, p1size, p1color, p2size, p2color, p3size, p3color;
+  int fade, p1size, p1color, p2size, p2color, p3size, p3color, selectHandler;
   boolean back, forward;
-  PImage godku, blueku;
+  PImage godku, blueku, displayImage;
   PVector p1s, p2s, p3s;
 
   Play() {
@@ -16,29 +16,24 @@ class Play {
     p1s = new PVector(width*0.2, height*0.4);
     p2s = new PVector(width*0.2, height*0.5);
     p3s = new PVector(width*0.2, height*0.6);
+    selectHandler = 1;
+    displayImage = godku;
   }
 
-  void levelScreen(){
+  void levelScreen() {
     fadeIn();
     fadeBack();
+    nextScreen();
   }
 
   void display()
   {
+    defineDisplay();
+
     stroke(255);
     fill(0);
     rect(width*0.6, height*0.15, 400, 775);
-
-    if (p1size == 50)
-    {
-      image(godku, width*0.605, height*0.16);
-    } else if (p2size == 50)
-    {
-      image(blueku, width*0.605, height*0.16);
-    } else if (p3size == 50)
-    {
-      image(mm.backgroundku, width*0.6, height*0.16);
-    }
+    image(displayImage, width*0.6, height*0.16);
 
     stroke(0);
     fill(p1color);
@@ -89,76 +84,100 @@ class Play {
 
   void selectControls()
   {
-    if (key == CODED)
-    {
-      if (keyCode == DOWN)
-      {
-        if (p1size == 50)
-        {
-          p1size = 40;
-          p1color = 255;
-
-          p2size = 50;
-          p2color = #2CBEFF;
-        } else if (p2size == 50)
-        {
-          p2size = 40;
-          p2color = 255;
-
-          p3size = 50;
-          p3color = #2CBEFF;
-        }
+    switch(keyCode) {
+    case DOWN:
+      if (selectHandler < 3) {
+        selectHandler ++;
       }
-
-      if (keyCode == UP)
-      {
-        if (p3size == 50)
-        {
-          p3size = 40;
-          p3color = 255;
-
-          p2size = 50;
-          p2color = #2CBEFF;
-        } else if (p2size == 50)
-        {
-          p2size = 40;
-          p2color = 255;
-
-          p1size = 50;
-          p1color = #2CBEFF;
-        }
+      break;
+    case UP:
+      if (selectHandler > 1) {
+        selectHandler --;
       }
-    }
+      break;
+    case ' ':
+      defineSelection();
+      break;
 
-    if (key == 'M' || key == 'm')
-    {
+    case 'm':
+    case 'M':
+      selectHandler = 1;
       back = true;
-    }
-    if (key == ' ' && p1size == 50)
-    {
-      fade = 99;
-      forward = true;
+      break;
+
+    default:
+      break;
     }
   }
-  
-  //void phaseFade()
-  //{
-  //  background(fade);
-  //  if (fade >= 255)
-  //  {
-  //    frameCount = 0;
-  //    background(0);
-  //    fill(0);
-  //    stroke(255);
-  //    strokeWeight(7);
-  //    rect(width*0.33, height*0.75, width*0.4, 160);
-  //    image(gp, width*0.334, height*0.725);
-  //    fade += 0;
-  //    state = 10;
-  //    forward = false;
-  //  } else
-  //  {
-  //    fade += 2;
-  //  }
-  //}
+
+  void defineDisplay() {
+    switch(selectHandler) {
+    case 1:
+      p2size = p3size = 40;
+      p2color = p3color = 255;
+
+      p1size = 50;
+      p1color = #2CBEFF;
+      displayImage = godku;
+      break;
+    case 2:
+      p1size = p3size = 40;
+      p1color = p3color = 255;
+
+      p2size = 50;
+      p2color = #2CBEFF;
+      displayImage = blueku;
+      break;
+    case 3:
+      p2size = p1size = 40;
+      p2color = p1color = 255;
+
+      p3size = 50;
+      p3color = #2CBEFF;
+      displayImage = mm.muiku;
+      break;
+
+    default:
+      break;
+    }
+  }
+
+  void defineSelection() {
+    switch(selectHandler) {
+    case 1:
+      fade = 99;
+      forward = true;
+      break;
+    case 2:
+      break;
+    case 3:
+      break;
+
+    default:
+      break;
+    }
+  }
+
+  void nextScreen()
+  {
+    if (forward) {
+      background(fade);
+      if (fade >= 255)
+      {
+        frameCount = 0;
+        background(0);
+        fill(0);
+        stroke(255);
+        strokeWeight(7);
+        rect(width*0.33, height*0.75, width*0.4, 160);
+        image(ph1.gp, width*0.334, height*0.725);
+        fade += 0;
+        state = 10;
+        forward = false;
+      } else
+      {
+        fade += 2;
+      }
+    }
+  }
 }
