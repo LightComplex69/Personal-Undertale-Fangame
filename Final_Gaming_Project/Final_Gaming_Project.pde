@@ -13,8 +13,7 @@ phase1 godphase;
 phase2 bluephase;
 Exit e;
 ph1d p;
-float state;
-int fade;
+int fade, state;
 boolean attackNotActive;
 PVector l, s;
 PImage fist, kick, arrows;
@@ -23,7 +22,19 @@ PImage[] kameF, goBlue;
 Minim minim;
 AudioInput input;
 AudioPlayer menusong, ingamesong, gameover, kameDamage, punchDamage, kickDamage, select, movemenu, kameCharge, kameBlast, gokuSpeak;
-
+/*-------------------------------------------------------------------
+states: 
+  0 - Main Menu
+  1 - Play
+    10 - Phase 1 
+    11 - Phase 2 
+    12 - Phase 3
+  2 - Help
+  3 - Options
+    30 - Controls
+    31 - Credits
+  4 - Exit
+-------------------------------------------------------------------*/
 void setup()
 {
   minim = new Minim(this);
@@ -77,97 +88,14 @@ void setup()
   godphase = new phase1();
   bluephase = new phase2();
   attackNotActive = false;
-  state = 2.2;
+  state = 0;
   textSize(25);
-  size(1920, 1080);
+  fullScreen();
 }
 
 void draw()
 {
-
-  if (!mm.stopSelection && state == 0)
-  {
-    mm.selectScreen();
-  } else if (state == -1)
-  {
-    e.exitGame();
-  } else if (state == 3)
-  {
-    o.selectScreen();
-    o.fadeBack();
-  } else if (mm.optionsSelected && mm.stopSelection)
-  {
-    o.fadeIn();
-  } else if (state == 3.1)
-  {
-    o.credits();
-  } else if (state == 3.2)
-  {
-    o.controls();
-  } else if (mm.playSelected && mm.stopSelection)
-  {
-    p.fadeIn();
-    p.phaseSelection();
-    p.fadeBack();
-  } else if (p.forward)
-  {
-    p.phaseFade();
-  } else if (state == 2.1)
-  {
-    p.introText();
-  } else if (state == 2.2)
-  {
-    if (!godphase.phasePassed && godphase.health > 0)
-    {
-      background(0);
-      one.movement();
-      two.movement();
-
-      godphase.firstAttack();
-
-      noStroke();
-      fill(50);
-      rect(0, 0, width, height*0.6+15); // top rectangle
-      rect(0, 0, width*0.05+15, height);  // left side rectangle
-      rect(width*0.65+585, 0, width, height);  // right side rectangle
-      rect(0, height*0.6+335, width, height);  // bottom rectangle
-      rect(width*0.05+585, height*0.6, width*0.65-(width*0.05+570), 350);  // middle rectangle
-
-      godphase.goku();
-      godphase.playBoxes();
-      godphase.kamehameha();
-      godphase.healthBar();
-    }
-    godphase.phaseDone();
-    godphase.transform();
-    gameOver();
-  } else if (state == 2.3)
-  {
-    background(0);
-
-    one.movement();
-    two.movement();
-
-
-    noStroke();
-    fill(50);
-    rect(0, 0, width, height*0.6+15); // top rectangle
-    rect(0, 0, width*0.05+15, height);  // left side rectangle
-    rect(width*0.65+585, 0, width, height);  // right side rectangle
-    rect(0, height*0.6+335, width, height);  // bottom rectangle
-    rect(width*0.05+585, height*0.6, width*0.65-(width*0.05+570), 350);  // middle rectangle
-
-    bluephase.firstAttack();
-    bluephase.goku();    
-    bluephase.playBoxes();
-    bluephase.healthBar();
-  } else if (mm.stopSelection && mm.exitSelected) 
-  {
-    e.prompt();
-    e.areYouSure();
-  }
-
-  println(godphase.health);
+  FSMhandler();
 }
 
 boolean gameOver()
@@ -207,48 +135,48 @@ boolean gameOver()
 
 void keyPressed()
 {
-  if (!mm.stopSelection && state == 0)
-  {
-    mm.selectionControls();
-  } else if (mm.stopSelection && mm.exitSelected)
-  {
-    e.areYouSureSelection();
-  } else if (mm.stopSelection && mm.playSelected)
-  {
-    p.phaseSelectControls();
-  } else if (state == 2.1)
-  {
-    p.confirmation();
-  } else if (state == 2.2)
-  {
-    one.moving(key, true);
-    two.moving(keyCode, true);
-    godphase.yes();
-  } else if (state == 2.3)
-  {
-    one.moving(key, true);
-    two.moving(keyCode, true);
-  } else if (state == 3)
-  {
-    o.selectControls();
-  } else if (state == 3.1)
-  {
-    o.creditBackout();
-  } else if (state == 3.2)
-  {
-    o.controlBackout();
-  }
+  //if (!mm.stopSelection && state == 0)
+  //{
+  //  mm.selectionControls();
+  //} else if (state == 4)
+  //{
+  //  e.areYouSureSelection();
+  //} else if (state == 1)
+  //{
+  //  p.phaseSelectControls();
+  //} else if (state == 2.1)
+  //{
+  //  p.confirmation();
+  //} else if (state == 2.2)
+  //{
+  //  one.moving(key, true);
+  //  two.moving(keyCode, true);
+  //  godphase.yes();
+  //} else if (state == 2.3)
+  //{
+  //  one.moving(key, true);
+  //  two.moving(keyCode, true);
+  //} else if (state == 3)
+  //{
+  //  o.selectControls();
+  //} else if (state == 3.1)
+  //{
+  //  o.creditBackout();
+  //} else if (state == 3.2)
+  //{
+  //  o.controlBackout();
+  //}
 }
 
 void keyReleased()
 {
-  if (state == 2.2 && godphase.health > 0)
-  {
-    one.moving(key, false);
-    two.moving(keyCode, false);
-  } else if (state == 2.3)
-  {
-    one.moving(key, false);
-    two.moving(keyCode, false);
-  }
+  //if (state == 2.2 && godphase.health > 0)
+  //{
+  //  one.moving(key, false);
+  //  two.moving(keyCode, false);
+  //} else if (state == 2.3)
+  //{
+  //  one.moving(key, false);
+  //  two.moving(keyCode, false);
+  //}
 }

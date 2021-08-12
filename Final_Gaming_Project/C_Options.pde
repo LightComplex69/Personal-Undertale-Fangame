@@ -22,7 +22,7 @@ class options
       {
         fade += 0;
         state = 3;
-      } else 
+      } else
       {
         fade -= 4;
       }
@@ -37,7 +37,6 @@ class options
       if (fade > 255)
       {
         fade += 0;
-        mm.optionsSelected = false;
         mm.stopSelection = false;
         fadeBack = false;
         state = 0;
@@ -70,12 +69,6 @@ class options
   {
     if (key == 'm' || key == 'M')
     {
-      if (select.position() >= 100)
-      {
-        select.rewind();
-      } 
-      select.play();
-      mm.optionsSelected = true;
       state = 3;
     }
   }
@@ -94,12 +87,6 @@ class options
   {
     if (key == 'm' || key == 'M')
     {
-      if (select.position() >= 100)
-      {
-        select.rewind();
-      } 
-      select.play();
-      mm.optionsSelected = true;
       state = 3;
     }
   }
@@ -126,11 +113,6 @@ class options
       {
         if (controlsSize == 50) // orange-ish
         {
-          if (movemenu.position() >= 50)
-          {
-            movemenu.rewind();
-          } 
-          movemenu.play();
           controlsColor = 255;
           controlsSize = 40;
           creditsColor = #FF08D2; // purple
@@ -142,11 +124,6 @@ class options
       {
         if (creditsSize == 50)
         {
-          if (movemenu.position() >= 50)
-          {
-            movemenu.rewind();
-          } 
-          movemenu.play();
           creditsColor = 255;
           creditsSize = 40;
           controlsColor = #55FF70;
@@ -154,36 +131,19 @@ class options
         }
       }
     }
+    
+    if (key == ' ' && controlsSize == 50)
+    {
+      state = 30;
+    }
 
     if (key == ' ' && creditsSize == 50)
     {
-      if (select.position() >= 100)
-      {
-        select.rewind();
-      } 
-      select.play();
-      mm.optionsSelected = false;
-      state = 3.1;
-    }
-
-    if (key == ' ' && controlsSize == 50)
-    {
-      if (select.position() >= 100)
-      {
-        select.rewind();
-      } 
-      select.play();
-      mm.optionsSelected = false;
-      state = 3.2;
+      state = 31;
     }
 
     if (key == 'm' || key == 'M')
     {
-      if (select.position() >= 100)
-      {
-        select.rewind();
-      } 
-      select.play();
       fadeBack = true;
     }
   }

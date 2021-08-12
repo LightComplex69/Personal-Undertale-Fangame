@@ -124,7 +124,7 @@ class ph1d
       }
       if (x > 1600)
       {
-        state = 2.2;
+        state = 11;
       }
     }
   }
@@ -557,10 +557,6 @@ class ph1d
   {
     if (state == 2)
     {
-      if (select.position() >= 100)
-      {
-        select.rewind();
-      } 
       stroke(255);
       fill(0);
       rect(width*0.6, height*0.15, 400, 775);
@@ -599,11 +595,6 @@ class ph1d
       {
         if (p1size == 50)
         {
-          if (movemenu.position() >= 50)
-          {
-            movemenu.rewind();
-          } 
-          movemenu.play();
           p1size = 40;
           p1c = 255;
 
@@ -611,11 +602,6 @@ class ph1d
           p2c = #2CBEFF;
         } else if (p2size == 50)
         {
-          if (movemenu.position() >= 50)
-          {
-            movemenu.rewind();
-          } 
-          movemenu.play();
           p2size = 40;
           p2c = 255;
 
@@ -628,11 +614,6 @@ class ph1d
       {
         if (p3size == 50)
         {
-          if (movemenu.position() >= 50)
-          {
-            movemenu.rewind();
-          } 
-          movemenu.play();
           p3size = 40;
           p3c = 255;
 
@@ -640,11 +621,6 @@ class ph1d
           p2c = #2CBEFF;
         } else if (p2size == 50)
         {
-          if (movemenu.position() >= 50)
-          {
-            movemenu.rewind();
-          } 
-          movemenu.play();
           p2size = 40;
           p2c = 255;
 
@@ -660,12 +636,8 @@ class ph1d
     }
     if (key == ' ' && p1size == 50)
     {
-
-      select.play();
-
       fade = 99;
       forward = true;
-      mm.playSelected = false;
     }
   }
 
@@ -694,7 +666,6 @@ class ph1d
       if (fade > 255)
       {
         fade += 0;
-        mm.playSelected = false;
         mm.stopSelection = false;
         back = false;
         state = 0;
@@ -718,7 +689,7 @@ class ph1d
       rect(width*0.33, height*0.75, width*0.4, 160);
       image(gp, width*0.334, height*0.725);
       fade += 0;
-      state = 2.1;
+      state = 10;
       forward = false;
     } else
     {

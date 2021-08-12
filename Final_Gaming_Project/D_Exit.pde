@@ -6,10 +6,9 @@ class Exit
   Exit()
   {
     fade = 0;
-    closeFade = 255;
+    closeFade = yesColor = 255;
     noColor = #FF0D15;
     noSize = 50;
-    yesColor = 255;
     yesSize = 40;
     areYouSure = false;
   }
@@ -56,11 +55,6 @@ class Exit
   {
     if (noColor == #FF0D15 && key == CODED && keyCode == LEFT)
     {
-      if (movemenu.position() >= 50)
-      {
-        movemenu.rewind();
-      } 
-      movemenu.play();
       noColor = 255;
       noSize = 40;
 
@@ -68,11 +62,6 @@ class Exit
       yesSize = 50;
     } else if (yesColor == #FEFF0D && key == CODED && keyCode == RIGHT)
     {
-      if (movemenu.position() >= 50)
-      {
-        movemenu.rewind();
-      } 
-      movemenu.play();
       yesColor = 255;
       yesSize = 40;
 
@@ -80,21 +69,11 @@ class Exit
       noSize = 50;
     } else if (noColor == #FF0D15 && key == ' ' || key == 'm' || key == 'M')
     {
-      if (select.position() >= 100)
-      {
-        select.pause();
-        select.rewind();
-      } 
-      select.play();
       fade = 0;
-      areYouSure = mm.stopSelection = mm.exitSelected = false;
+      areYouSure = mm.stopSelection = false;
+      state = 0;
     } else if (yesColor == #FEFF0D && key == ' ')
     {
-      if (select.position() >= 100)
-      {
-        select.rewind();
-      } 
-      select.play();
       state = -1;
     }
   }

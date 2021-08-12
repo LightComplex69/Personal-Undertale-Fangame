@@ -273,7 +273,7 @@ class phase1
         if (x > 5000)
         {
           transformation = false;
-          state = 2.3;
+          state = 11;
         }
       }
     }
