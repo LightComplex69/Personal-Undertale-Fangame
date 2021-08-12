@@ -1,6 +1,6 @@
 class options
 {
-  int fade, controlsSize, controlsColor, creditsSize, creditsColor;
+  int fade, controlsSize, controlsColor, creditsSize, creditsColor, selectHandler;
   boolean fadeBack;
 
   options()
@@ -11,11 +11,12 @@ class options
     controlsColor = #55FF70;
     creditsSize = 40;
     creditsColor = 255;
+    selectHandler = 1;
   }
 
-  void optionScreen(){
-   fadeIn();
-   fadeBack();
+  void optionScreen() {
+    fadeIn();
+    fadeBack();
   }
 
   void fadeIn()
@@ -56,6 +57,7 @@ class options
   {
     background(fade);
 
+    defineDisplay();
     textSize(controlsSize);
     fill(controlsColor);
     text("Controls", width/4-80, height*0.4);
@@ -83,14 +85,6 @@ class options
     text("Original premise idea is a remixed form of Undertale, pretty much like a fan Game", width/4-80, height*0.7);
   }
 
-  void creditBackout()
-  {
-    if (key == 'm' || key == 'M')
-    {
-      state = 3;
-    }
-  }
-
   void displayControls()
   {
     background(fade);
@@ -101,7 +95,7 @@ class options
     text("Space is the select/confirm button and M is the back button", width*0.12, height*0.5);
   }
 
-  void controlBackout()
+  void backout()
   {
     if (key == 'm' || key == 'M')
     {
@@ -111,44 +105,62 @@ class options
 
   void selectControls()
   {
-    if (key == CODED)
-    {
-      if (keyCode == DOWN)
-      {
-        if (controlsSize == 50) // orange-ish
-        {
-          controlsColor = 255;
-          controlsSize = 40;
-          creditsColor = #FF08D2; // purple
-          creditsSize = 50;
-        }
+    switch(keyCode) {
+    case DOWN:
+      if (selectHandler < 2) {
+        selectHandler ++;
       }
-
-      if (keyCode == UP)
-      {
-        if (creditsSize == 50)
-        {
-          creditsColor = 255;
-          creditsSize = 40;
-          controlsColor = #55FF70;
-          controlsSize = 50;
-        }
+      break;
+    case UP:
+      if (selectHandler > 1) {
+        selectHandler --;
       }
+      break;
+    case ' ':
+      defineSelection();
+      break;
+      
+    case 'm':
+    case 'M':
+    fadeBack = true;
+    break;
+    
+    default:
+      break;
     }
+  }
 
-    if (key == ' ' && controlsSize == 50)
-    {
+  void defineDisplay() {
+    switch(selectHandler) {
+    case 1:
+      creditsColor = 255;
+      creditsSize = 40;
+      controlsColor = #55FF70;
+      controlsSize = 50;
+      break;
+    case 2:
+      controlsColor = 255;
+      controlsSize = 40;
+      creditsColor = #FF08D2;
+      creditsSize = 50;
+      break;
+
+    default:
+      break;
+    }
+  }
+
+  void defineSelection() {
+    switch(selectHandler) {
+    case 1:
       state = 30;
-    }
-
-    if (key == ' ' && creditsSize == 50)
-    {
+      break;
+    case 2:
       state = 31;
-    }
+      break;
 
-    if (key == 'm' || key == 'M')
-    {
-      fadeBack = true;
+    default:
+      break;
     }
   }
 }

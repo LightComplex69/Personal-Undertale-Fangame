@@ -1,3 +1,16 @@
+/*-------------------------------------------------------------------
+states: 
+  0 - Main Menu
+  1 - Play
+    10 - Phase 1 
+    11 - Phase 2 
+    12 - Phase 3
+  2 - Help
+  3 - Options
+    30 - Controls
+    31 - Credits
+  4 - Exit
+-------------------------------------------------------------------*/
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -12,7 +25,7 @@ player2 two;
 phase1 godphase;
 phase2 bluephase;
 Exit e;
-ph1d p;
+Play p;
 int fade, state;
 boolean attackNotActive;
 PVector l, s;
@@ -22,19 +35,6 @@ PImage[] kameF, goBlue;
 Minim minim;
 AudioInput input;
 AudioPlayer menusong, ingamesong, gameover, kameDamage, punchDamage, kickDamage, select, movemenu, kameCharge, kameBlast, gokuSpeak;
-/*-------------------------------------------------------------------
-states: 
-  0 - Main Menu
-  1 - Play
-    10 - Phase 1 
-    11 - Phase 2 
-    12 - Phase 3
-  2 - Help
-  3 - Options
-    30 - Controls
-    31 - Credits
-  4 - Exit
--------------------------------------------------------------------*/
 void setup()
 {
   minim = new Minim(this);
@@ -83,7 +83,7 @@ void setup()
   s = new PVector(3,2);
   mm = new mainMenu();
   e = new Exit();
-  p = new ph1d();
+  p = new Play();
   o = new options();
   godphase = new phase1();
   bluephase = new phase2();

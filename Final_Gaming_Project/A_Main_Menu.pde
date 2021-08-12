@@ -134,6 +134,7 @@ class mainMenu
       state = 1;
       break;
     case 2:
+      break;
     case 3:
       state = 3;
       break;

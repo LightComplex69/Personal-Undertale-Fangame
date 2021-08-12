@@ -4,13 +4,18 @@ void FSMdisplay() {
     mm.selectScreen();
     break;
   case 1:
-    p.fadeIn();
-    p.phaseSelection();
-    p.fadeBack();
+    p.levelScreen();
     break;
   case 2:
+    break;
   case 3:
     o.optionScreen();
+    break;
+  case 30:
+    o.displayControls();
+    break;
+  case 31:
+    o.displayCredits();
     break;
   case 4:
     e.exitScreen();
@@ -109,11 +114,16 @@ void FSMcontrols() {
     mm.selectControls();
     break;
   case 1:
+    p.selectControls();
     break;
   case 2:
     break;
   case 3:
     o.selectControls();
+    break;
+  case 30:
+  case 31:
+    o.backout();
     break;
   case 4:
     e.selectControls();
