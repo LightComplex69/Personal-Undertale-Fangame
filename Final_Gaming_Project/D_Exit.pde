@@ -1,16 +1,21 @@
 class Exit
 {
-  int yesColor, yesSize, noColor, noSize, fade, closeFade;
+  int yesColor, yesSize, noColor, noSize, fade, closeFade, selectHandler;
   boolean areYouSure, activateFade;
 
   Exit()
   {
     fade = 0;
+    selectHandler = 1;
     closeFade = yesColor = 255;
     noColor = #FF0D15;
     noSize = 50;
     yesSize = 40;
     areYouSure = false;
+  }
+
+  void exitScreen() {
+    prompt();
   }
 
   void prompt()
@@ -22,8 +27,8 @@ class Exit
     {
       fade += 0;
       activateFade = false;
-      areYouSure = true;
-    } else 
+      areYouSure();
+    } else
     {
       fade += 2;
     }
@@ -32,49 +37,85 @@ class Exit
 
   void areYouSure()
   {
-    if (areYouSure)
-    {
-      fill(0, fade);
-      //rect(0, 0, width, height);
 
-      textSize(60);
-      fill(255);
-      text("Are You Sure About That?", width*0.32, height/2);
+    fill(0, fade);
+    //rect(0, 0, width, height);
 
-      textSize(noSize);
-      fill(noColor);
-      text("No", width*0.7, height*0.66);
+    textSize(60);
+    fill(255);
+    text("Are You Sure About That?", width*0.32, height/2);
 
-      textSize(yesSize);
-      fill(yesColor);
-      text("Yes", width*0.3, height*0.66);
+    defineDisplay();
+    textSize(noSize);
+    fill(noColor);
+    text("No", width*0.7, height*0.66);
+
+    textSize(yesSize);
+    fill(yesColor);
+    text("Yes", width*0.3, height*0.66);
+  }
+
+  void selectControls()
+  {
+    switch(keyCode) {
+    case LEFT:
+      if (selectHandler > 1) {
+        selectHandler --;
+      }
+      break;
+    case RIGHT:
+      if (selectHandler < 2) {
+        selectHandler ++;
+      }
+      break;
+      
+    case 'm':
+    case 'M':
+      selectHandler = 2;
+    case ' ':
+      defineSelection();
+      break;
+
+    default:
+      break;
     }
   }
 
-  void areYouSureSelection()
-  {
-    if (noColor == #FF0D15 && key == CODED && keyCode == LEFT)
-    {
+  void defineDisplay() {
+    switch(selectHandler) {
+    case 1:
       noColor = 255;
       noSize = 40;
 
       yesColor = #FEFF0D;
       yesSize = 50;
-    } else if (yesColor == #FEFF0D && key == CODED && keyCode == RIGHT)
-    {
+      break;
+    case 2:
       yesColor = 255;
       yesSize = 40;
 
       noColor = #FF0D15;
       noSize = 50;
-    } else if (noColor == #FF0D15 && key == ' ' || key == 'm' || key == 'M')
-    {
+      break;
+
+    default:
+      break;
+    }
+  }
+
+  void defineSelection() {
+    switch(selectHandler) {
+    case 1:
+      state = 40;
+      break;
+    case 2:
       fade = 0;
-      areYouSure = mm.stopSelection = false;
+      mm.stopSelection = false;
       state = 0;
-    } else if (yesColor == #FEFF0D && key == ' ')
-    {
-      state = -1;
+      break;
+
+    default:
+      break;
     }
   }
 

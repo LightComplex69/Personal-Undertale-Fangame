@@ -1,4 +1,4 @@
-void FSMhandler() {
+void FSMdisplay() {
   switch(state) {
   case 0:
     mm.selectScreen();
@@ -10,20 +10,20 @@ void FSMhandler() {
     break;
   case 2:
   case 3:
+    o.optionScreen();
     break;
   case 4:
-    e.prompt();
-    e.areYouSure();
+    e.exitScreen();
+    break;
+  case 40:
+    e.exitGame();
     break;
 
   default:
     break;
   }
 
-  //  if (!mm.stopSelection && state == 0)
-  //  {
-  //    mm.selectScreen();
-  //  } else if (state == -1)
+  //  if (state == -1)
   //  {
   //    e.exitGame();
   //  } else if (state == 3)
@@ -101,4 +101,56 @@ void FSMhandler() {
   //    e.prompt();
   //    e.areYouSure();
   //  }
+}
+
+void FSMcontrols() {
+  switch(state) {
+  case 0:
+    mm.selectControls();
+    break;
+  case 1:
+    break;
+  case 2:
+    break;
+  case 3:
+    o.selectControls();
+    break;
+  case 4:
+    e.selectControls();
+    break;
+
+  default:
+    break;
+  }
+  //if (!mm.stopSelection && state == 0)
+  //{
+  //  mm.selectionControls();
+  //} else if (state == 4)
+  //{
+  //  e.areYouSureSelection();
+  //} else if (state == 1)
+  //{
+  //  p.phaseSelectControls();
+  //} else if (state == 2.1)
+  //{
+  //  p.confirmation();
+  //} else if (state == 2.2)
+  //{
+  //  one.moving(key, true);
+  //  two.moving(keyCode, true);
+  //  godphase.yes();
+  //} else if (state == 2.3)
+  //{
+  //  one.moving(key, true);
+  //  two.moving(keyCode, true);
+  //} else if (state == 3)
+  //{
+  //  o.selectControls();
+  //} else if (state == 3.1)
+  //{
+  //  o.creditBackout();
+  //} else if (state == 3.2)
+  //{
+  //  o.controlBackout();
+  //}
 }

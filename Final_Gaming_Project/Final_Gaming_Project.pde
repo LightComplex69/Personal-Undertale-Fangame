@@ -95,7 +95,7 @@ void setup()
 
 void draw()
 {
-  FSMhandler();
+  FSMdisplay();
 }
 
 boolean gameOver()
@@ -135,37 +135,7 @@ boolean gameOver()
 
 void keyPressed()
 {
-  //if (!mm.stopSelection && state == 0)
-  //{
-  //  mm.selectionControls();
-  //} else if (state == 4)
-  //{
-  //  e.areYouSureSelection();
-  //} else if (state == 1)
-  //{
-  //  p.phaseSelectControls();
-  //} else if (state == 2.1)
-  //{
-  //  p.confirmation();
-  //} else if (state == 2.2)
-  //{
-  //  one.moving(key, true);
-  //  two.moving(keyCode, true);
-  //  godphase.yes();
-  //} else if (state == 2.3)
-  //{
-  //  one.moving(key, true);
-  //  two.moving(keyCode, true);
-  //} else if (state == 3)
-  //{
-  //  o.selectControls();
-  //} else if (state == 3.1)
-  //{
-  //  o.creditBackout();
-  //} else if (state == 3.2)
-  //{
-  //  o.controlBackout();
-  //}
+  FSMcontrols();
 }
 
 void keyReleased()

@@ -13,6 +13,11 @@ class options
     creditsColor = 255;
   }
 
+  void optionScreen(){
+   fadeIn();
+   fadeBack();
+  }
+
   void fadeIn()
   {
     if (!fadeBack)
@@ -21,7 +26,7 @@ class options
       if (fade < 100)
       {
         fade += 0;
-        state = 3;
+        display();
       } else
       {
         fade -= 4;
@@ -47,7 +52,20 @@ class options
     }
   }
 
-  void credits()
+  void display()
+  {
+    background(fade);
+
+    textSize(controlsSize);
+    fill(controlsColor);
+    text("Controls", width/4-80, height*0.4);
+
+    textSize(creditsSize);
+    fill(creditsColor);
+    text("Credits", width/4-80, height*0.6);
+  }
+
+  void displayCredits()
   {
     background(fade);
 
@@ -73,7 +91,7 @@ class options
     }
   }
 
-  void controls()
+  void displayControls()
   {
     background(fade);
 
@@ -90,20 +108,6 @@ class options
       state = 3;
     }
   }
-
-  void selectScreen()
-  {
-    background(fade);
-
-    textSize(controlsSize);
-    fill(controlsColor);
-    text("Controls", width/4-80, height*0.4);
-
-    textSize(creditsSize);
-    fill(creditsColor);
-    text("Credits", width/4-80, height*0.6);
-  }
-
 
   void selectControls()
   {
@@ -131,7 +135,7 @@ class options
         }
       }
     }
-    
+
     if (key == ' ' && controlsSize == 50)
     {
       state = 30;

@@ -2,7 +2,7 @@ class mainMenu
 {
   PImage Title, play, htp, options, exit, backgroundku;
   PVector title, ps, htps, os, es;
-  int opacity, optionHandler;
+  int opacity, selectHandler;
   float titleSpeed, fadeSpeed;
   boolean stopSelection;
 
@@ -11,7 +11,7 @@ class mainMenu
     Title = loadImage("title_screen.png");
     title = new PVector(width*0.4, height*0.1);
     opacity = 0; 
-    fadeSpeed = titleSpeed = optionHandler = 1;
+    fadeSpeed = titleSpeed = selectHandler = 1;
 
     play = loadImage("play_button.png");
     htp = loadImage("htp_button.png");
@@ -30,7 +30,7 @@ class mainMenu
   void selectScreen()
   {
     displayAssets();
-    defineMenuOptions();
+    defineDisplay();
     handleFade();
   }
 
@@ -70,17 +70,17 @@ class mainMenu
     }
   }
 
-  void selectionControls()
+  void selectControls()
   {
     switch(keyCode) {
     case DOWN:
-      if (optionHandler < 3) {
-        optionHandler += 1;
+      if (selectHandler < 4) {
+        selectHandler ++;
       }
       break;
     case UP:
-      if (optionHandler > 0) {
-        optionHandler -= 1;
+      if (selectHandler > 1) {
+        selectHandler --;
       }
       break;
     case ' ':
@@ -92,8 +92,8 @@ class mainMenu
     }
   }
 
-  void defineMenuOptions() {
-    switch(optionHandler) {
+  void defineDisplay() {
+    switch(selectHandler) {
     case 1:
       pushStyle();
       tint(#FEFF08);
@@ -129,7 +129,7 @@ class mainMenu
   }
 
   void defineSelection() {
-    switch(optionHandler) {
+    switch(selectHandler) {
     case 1:
       state = 1;
       break;
