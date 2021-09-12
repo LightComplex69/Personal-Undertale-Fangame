@@ -7,7 +7,7 @@ void FSMdisplay() {
     p.levelScreen();
     break;
   case 10:
-    ph1.introText();
+    id.intro();
     break;
   case 2:
     break;
@@ -103,7 +103,7 @@ void FSMcontrols() {
     p.selectControls();
     break;
   case 10:
-    ph1.confirmControls();
+    id.confirmControls();
     break;
   case 2:
     break;

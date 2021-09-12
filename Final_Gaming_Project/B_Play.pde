@@ -170,7 +170,7 @@ class Play {
         stroke(255);
         strokeWeight(7);
         rect(width*0.33, height*0.75, width*0.4, 160);
-        image(ph1.gp, width*0.334, height*0.725);
+        image(gp, width*0.334, height*0.725);
         fade += 0;
         state = 10;
         forward = false;

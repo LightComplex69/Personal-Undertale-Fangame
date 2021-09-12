@@ -1,16 +1,16 @@
 /*-------------------------------------------------------------------
-states: 
-  0 - Main Menu
-  1 - Play
-    10 - Phase 1 
-    11 - Phase 2 
-    12 - Phase 3
-  2 - Help
-  3 - Options
-    30 - Controls
-    31 - Credits
-  4 - Exit
--------------------------------------------------------------------*/
+ states: 
+ 0 - Main Menu
+ 1 - Play
+ 10 - Phase 1 
+ 11 - Phase 2 
+ 12 - Phase 3
+ 2 - Help
+ 3 - Options
+ 30 - Controls
+ 31 - Credits
+ 4 - Exit
+ -------------------------------------------------------------------*/
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -22,7 +22,7 @@ mainMenu mm;
 options o;
 Exit e;
 Play p;
-Phase_1 ph1;
+IntroDialogue id;
 player1 one;
 player2 two;
 phase1 godphase;
@@ -31,7 +31,8 @@ int fade, state;
 boolean attackNotActive;
 PVector l, s;
 PImage fist, kick, arrows;
-PImage[] kameF, goBlue; 
+PImage[] kameF, goBlue;
+PImage gp, agp, sgp, dgp, spgp, fgp, tgp;
 
 Minim minim;
 AudioInput input;
@@ -49,6 +50,14 @@ void setup()
   input = minim.getLineIn();
 
   arrows = loadImage("arrows.png");
+
+  gp = loadImage("goku_portrait.png");
+  agp = loadImage("angrygoku_portrait.png");
+  sgp = loadImage("sadgoku_portrait.png");
+  dgp = loadImage("disappointedgoku_portrait.png");
+  spgp = loadImage("speechlessgoku_portrait.png");
+  fgp = loadImage("furygoku_portrait.png");
+  tgp = loadImage("transforminggoku_portrait.png");
 
   fist = loadImage("fistUp.png");
   kick = loadImage("kick.png");
@@ -81,16 +90,16 @@ void setup()
   one = new player1(width*0.2, height*0.75, 4, 4);
   two = new player2(width*0.8, height*0.75, 4, 4);
   l = new PVector(width/4, height/3);
-  s = new PVector(3,2);
+  s = new PVector(3, 2);
   mm = new mainMenu();
   e = new Exit();
   p = new Play();
-  ph1 = new Phase_1();
+  id = new IntroDialogue("data/dialogue.json");
   o = new options();
   godphase = new phase1();
   bluephase = new phase2();
   attackNotActive = false;
-  state = 0;
+  state = 10;
   textSize(25);
   fullScreen();
 }
@@ -102,31 +111,31 @@ void draw()
 
 boolean gameOver()
 {
-  
+
   if (godphase.health <= 0)
   {
     fill(0, fade);
     rect(0, 0, width, height);
-    if(fade >= 150)
+    if (fade >= 150)
     {
       fade += 0;
-      
+
       textSize(50);
-      fill(255,0,0);
+      fill(255, 0, 0);
       text("Game Over", l.x, l.y);
-      
-      if(l.x >= width*0.7 || l.x <= width*0.2)
+
+      if (l.x >= width*0.7 || l.x <= width*0.2)
       {
-       s.x *= -1; 
+        s.x *= -1;
       }
-      if(l.y >= height*0.5 || l.y <= height*0.1)
+      if (l.y >= height*0.5 || l.y <= height*0.1)
       {
-       s.y *= -1; 
+        s.y *= -1;
       }
       l.add(s);
-    }else
+    } else
     {
-     fade += 1; 
+      fade += 1;
     }
     return true;
   } else

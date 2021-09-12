@@ -32,7 +32,6 @@ class Exit
     {
       fade += 2;
     }
-    println(fade);
   }
 
   void areYouSure()
