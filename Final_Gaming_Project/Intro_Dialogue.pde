@@ -7,7 +7,7 @@ class IntroDialogue
   boolean canConfirm;
 
   IntroDialogue(String saveFile)
-  {    
+  {
     text = "";
     scrollSpeed = 5;
     logueLimit = 1;
@@ -24,15 +24,15 @@ class IntroDialogue
   void intro() {
     background(0);
     d = dialogues.get(logueIndex);
-    displayText(d.text, d.face);
+    displayTextBox(new PVector(width*.33, height*.75), new PVector(width*.4, 160), d.text, d.face);
   }
 
-  void displayText(String inputText, String facialExpression) {
+  void displayTextBox(PVector boxLocation, PVector boxSize, String inputText, String facialExpression) {
     fill(30);
     textSize(30);
     strokeWeight(7);
     stroke(255);
-    rect(width*.33, height*.75, width*.4, 160);
+    rect(boxLocation.x, boxLocation.y, boxSize.x, boxSize.y);
     fill(255);
     image(loadImage(facialExpression + "goku_portrait.png"), width*0.332, height*0.725);
 

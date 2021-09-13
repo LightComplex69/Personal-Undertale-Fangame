@@ -21,9 +21,7 @@ class Play {
   }
 
   void levelScreen() {
-    fadeIn();
-    fadeBack();
-    nextScreen();
+    fade();
   }
 
   void display()
@@ -49,7 +47,7 @@ class Play {
     text("Phase 3", p3s.x, p3s.y);
   }
 
-  void fadeIn()
+  void fade()
   {
     if (!back)
     {
@@ -62,12 +60,7 @@ class Play {
       {
         fade -= 4;
       }
-    }
-  }
-
-  void fadeBack()
-  {
-    if (back)
+    } else
     {
       background(fade);
       if (fade > 255)
@@ -145,8 +138,7 @@ class Play {
   void defineSelection() {
     switch(selectHandler) {
     case 1:
-      fade = 99;
-      forward = true;
+      state = 10;
       break;
     case 2:
       break;
@@ -155,29 +147,6 @@ class Play {
 
     default:
       break;
-    }
-  }
-
-  void nextScreen()
-  {
-    if (forward) {
-      background(fade);
-      if (fade >= 255)
-      {
-        frameCount = 0;
-        background(0);
-        fill(0);
-        stroke(255);
-        strokeWeight(7);
-        rect(width*0.33, height*0.75, width*0.4, 160);
-        image(gp, width*0.334, height*0.725);
-        fade += 0;
-        state = 10;
-        forward = false;
-      } else
-      {
-        fade += 2;
-      }
     }
   }
 }

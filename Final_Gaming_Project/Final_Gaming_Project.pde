@@ -99,7 +99,7 @@ void setup()
   godphase = new phase1();
   bluephase = new phase2();
   attackNotActive = false;
-  state = 10;
+  state = 0;
   textSize(25);
   fullScreen();
 }
