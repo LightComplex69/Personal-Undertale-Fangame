@@ -9,4 +9,5 @@ The game starts at the end of a genocide run in which you have killed all of Gok
 Do you have what it takes to bring down the most formidable saiyan....or will you perhaps see the error of your ways and...reset?
 #
 Language: Java  
-Application Used: Processing
+Application Used: Processing  
+Still a work in progress...
