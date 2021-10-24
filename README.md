@@ -10,5 +10,11 @@ Do you have what it takes to bring down the most formidable saiyan....or will yo
 #
 Language: Java  
 Application Used: Processing 3.5.4  
-- Currently rewriting a lot of the code as I haven't worked on this project since before Covid and I've learned a lot more since then
-- Still a work in progress...
+Currently rewriting a lot of the code as I haven't worked on this project since before Covid and I've learned a lot more since then  
+#
+Done:  
+- Menus and dialogue rewritten  
+
+Future updates:  
+- Rewrite gameplay
+- Polish file system
